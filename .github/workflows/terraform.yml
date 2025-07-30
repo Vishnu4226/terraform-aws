@@ -33,3 +33,14 @@ jobs:
 
     - name: Terraform Plan
       run: terraform plan -input=false
+
+    - name: Install Infracost
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scripts/install.sh | sh
+
+    - name: Run Infracost Breakdown
+      env:
+        #INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
+        INFRACOST_API_KEY: ico-5dkInRidKyoErtXV38k4r6SuEQNTIOB3
+      run: |
+        infracost breakdown --path=. --format=table
